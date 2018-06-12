@@ -1,47 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
+import db.DB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.User;
 
-/**
- *
- * @author Blagoje
- */
 public class GetUser extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected User processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetUser</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        HttpSession session = request.getSession();
+
+        User user = new User();
+                
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DB.getInstance().getConnection();
+            
+            stmt = conn.createStatement();
+            
+            String query = "Select id, name, last_name, birthday, total_hours, "
+                    + "start_year, nickname"
+                    + "from users"
+                    + "where id ="+userId;
+            
+            rs = stmt.executeQuery(query);
+            if(rs.next())
+            {
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setTotalHours(rs.getInt("total_hours"));
+                user.setStartYear(rs.getInt("start_year"));
+                user.setNickName(rs.getString("nickname"));
+            }
+        } catch (SQLException exc) {
+            exc.getMessage();
         }
+        
+        return user;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -39,8 +39,7 @@ public class Register extends HttpServlet {
         user.setStartYear(Integer.parseInt(request.getParameter("startYear")));
         user.setNickName(request.getParameter("nickName"));
         user.setPassword(request.getParameter("password"));
-        user.setTotalNumber(0);
-        user.setIsDeleted(0);
+
 
         System.out.println(user);
         try {

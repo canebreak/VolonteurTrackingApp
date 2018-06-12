@@ -1,50 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import db.DB;
+import java.sql.SQLException;
+import models.User;
 
-/**
- *
- * @author Blagoje
- */
 public class GetUsersForEvent extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected List<User> processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetUsersForSpecificEvent</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetUsersForSpecificEvent at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        int eventId = Integer.parseInt(request.getParameter("eventId"));
+
+        Connection con;
+        Statement stmt;
+        ResultSet rs;
+        HttpSession session = request.getSession();
+
+        List<User> userList = new ArrayList<User>();
+
+        try {
+            con = DB.getInstance().getConnection();
+            stmt = con.createStatement();
+
+            String query = "SELECT\n"
+                    + "    u.id,\n"
+                    + "    u.name,\n"
+                    + "    u.last_name,\n"
+                    + "    u.birthday,\n"
+                    + "    u.total_hours,\n"
+                    + "    u.start_year,\n"
+                    + "    u.nickname\n"
+                    + "FROM\n"
+                    + "    USER AS u\n"
+                    + "LEFT JOIN user_event_xref AS xref\n"
+                    + "ON\n"
+                    + "u.id = xref.user_id\n"
+                    + "where xref.event_id = " + eventId;
+
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setBirthday(rs.getDate("birthday"));
+                user.setTotalHours(rs.getInt("total_hours"));
+                user.setStartYear(rs.getInt("start_year"));
+                user.setNickName(rs.getString("nickname"));
+
+                userList.add(user);
+            }
+            session.setAttribute("userList", userList);
+        } catch (SQLException exc) {
+            System.out.println(exc.getMessage());
         }
+
+        return userList;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

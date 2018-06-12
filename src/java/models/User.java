@@ -7,11 +7,12 @@ public class User {
     private int id;
     private String name, lastName, nickName;
     private Date birthday;
-    private int totalNumber;
+    private int totalHours;
     private int startYear;
     private String password;
     private int isDeleted;
 
+    public User(){}
     public String getNickName() {
         return nickName;
     }
@@ -52,12 +53,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public int getTotalNumber() {
-        return totalNumber;
+    public int getTotalHours() {
+        return totalHours;
     }
 
-    public void setTotalNumber(int totalNumber) {
-        this.totalNumber = totalNumber;
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
     }
 
     public int getStartYear() {
@@ -86,7 +87,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", nickName=" + nickName + ", birthday=" + birthday + ", totalNumber=" + totalNumber + ", startYear=" + startYear + ", password=" + password + ", isDeleted=" + isDeleted + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", nickName=" + nickName + ", birthday=" + birthday + ", totalNumber=" + totalHours + ", startYear=" + startYear + ", password=" + password + ", isDeleted=" + isDeleted + '}';
     }
 
     

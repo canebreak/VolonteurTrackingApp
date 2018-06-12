@@ -1,47 +1,60 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
+import db.DB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.Event;
 
-/**
- *
- * @author Blagoje
- */
 public class GetEventsForUser extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected List<Event> processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetEventsForUser</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetEventsForUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        List<Event> eventList = new ArrayList<>();
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        HttpSession session = request.getSession();
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DB.getInstance().getConnection();
+            stmt = conn.createStatement();
+            String query = "SELECT e.id, e.name, e.date, e.start_time, e.end_time,"
+                    + " e.hours_duration, e.place"
+                    + " FROM EVENT e "
+                    + "LEFT JOIN user_event_xref xref"
+                    + " ON "
+                    + "e.id = xref.event_id "
+                    + "WHERE"
+                    + " xref.is_deleted = 0 "
+                    + "AND e.is_deleted = 0"
+                    + " AND xref.user_id = " 
+                    + userId;
+            rs = stmt.executeQuery(query);
+            
+            
+            while(rs.next())
+            {
+            }
+        } catch (SQLException exc) {
+            exc.getMessage();
         }
+        
+        return eventList;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

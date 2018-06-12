@@ -1,15 +1,47 @@
-
 package models;
 
 import java.time.LocalDate;
 
 public class Event {
-    
+
     private int id;
-    private String name;
+    private String name, place;
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
     private LocalDate date;
-    private String time;
+    private String startTime, endTime;
+    private float durationInHours;
     private int volonteurNumber;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public float getDurationInHours() {
+        return durationInHours;
+    }
+
+    public void setDurationInHours(float durationInHours) {
+        this.durationInHours = durationInHours;
+    }
     private int isDeleted;
 
     public int getId() {
@@ -36,14 +68,6 @@ public class Event {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public int getVolonteurNumber() {
         return volonteurNumber;
     }
@@ -61,4 +85,3 @@ public class Event {
     }
 
 }
-

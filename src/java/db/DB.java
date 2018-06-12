@@ -22,7 +22,7 @@ public class DB {
             Class.forName("com.mysql.cj.jdbc.Driver");
             for (int i = 0; i < MAX_CON; i++) {
                 bafer[i] = DriverManager.getConnection(
-                                "jdbc:mysql://localhost:3306 /volonteur_tracking_app", "root", "");
+                                "jdbc:mysql://localhost:3306/volonteur_tracking_app", "root", "");
             }
             System.out.println("Connection established");
         } catch (Exception e) {
