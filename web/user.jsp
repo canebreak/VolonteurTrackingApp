@@ -3,13 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head> 
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/bootstrap.css"/>
-        <script src="js/bootstrap.min.js"></script>
+        <%@include  file="head.html" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
@@ -46,7 +40,7 @@
                         <div class="col-md-2">Korisnicko ime: </div>
                         <div class="col-md-2 col-md-offset-2 pull-right">Korisnicko ime</div>
                     </div></div>
-                
+
                 <table class="table table-striped">
                     <thead>
                         <tr>

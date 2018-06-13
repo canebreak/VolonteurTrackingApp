@@ -3,14 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <%@include  file="head.html" %>
         <link rel="stylesheet" href="css/login-css.css"/>
-        <script src="js/bootstrap.min.js"></script>
         <title>VTA | Login</title>
     </head>
     <body>
