@@ -22,7 +22,7 @@ public class Register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
 
-        DB db = DB.getInstance();
+        DB db = null;
         Connection con = null;
         Statement stmt = null;
 
@@ -63,7 +63,6 @@ public class Register extends HttpServlet {
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        db.putConnection(con);
         response.sendRedirect(address);
 
     }

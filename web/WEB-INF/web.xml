@@ -44,6 +44,10 @@
         <servlet-name>GetUsers</servlet-name>
         <servlet-class>services.GetUsers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>services.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>GetUsers</servlet-name>
         <url-pattern>/GetUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <img src="img/logo.png" alt="Logo" class="img-center"/>
+
     </body>
 </html>

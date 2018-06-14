@@ -6,3 +6,7 @@
     height: 30px;
     border-radius: 3px;
 }
+body
+{
+    overflow-x: hidden;
+}

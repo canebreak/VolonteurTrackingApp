@@ -4,13 +4,12 @@
 <html>
     <head>
         <%@include  file="head.html" %>
-        <link rel="stylesheet" href="css/login-css.css"/>
         <title>VTA | Register</title>
     </head>
     <body>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <img src="img/logo.png" alt="Logo" class="img-responsive"/>
+                <img src="img/logo.png" alt="Logo" class="img-center"/>
                 <form action="Register" method="POST">
                     Ime: <input type="text" name="name" class="form-control" required/><br/>
                     Prezime: <input type="text" name="lastName" class="form-control" required/><br/>

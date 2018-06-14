@@ -1,11 +1,15 @@
 package models;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Event {
 
     private int id;
     private String name, place;
+    private Date date;
+    private String startTime, endTime;
+    private float durationInHours;
+    private int volonteurNumber;
 
     public String getPlace() {
         return place;
@@ -14,10 +18,6 @@ public class Event {
     public void setPlace(String place) {
         this.place = place;
     }
-    private LocalDate date;
-    private String startTime, endTime;
-    private float durationInHours;
-    private int volonteurNumber;
 
     public String getStartTime() {
         return startTime;
@@ -60,11 +60,11 @@ public class Event {
         this.name = name;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

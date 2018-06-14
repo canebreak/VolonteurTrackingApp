@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/register.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/css/admin-css.css</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/user.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/deactivate_user.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/change_password.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/head.html</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/login.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/src/java/services/GetUsers.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/NetBeansProjects/VolonteurTrackingApp/web/admin.jsp</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/css/main.css</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/rowmappers/EventRowMapper.java</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/new_event.jsp</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/AddEvent.java</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/js/new-event.js</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/admin.jsp</file>
         </group>
     </open-files>
 </project-private>

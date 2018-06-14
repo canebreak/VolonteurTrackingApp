@@ -1,17 +1,29 @@
-<%-- 
-    Document   : new_event
-    Created on : Jun 10, 2018, 8:57:52 AM
-    Author     : Blagoje
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%@include  file="head.html" %>
+        <script src="js/new-event.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>VTA | nova akcija</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <img src="img/logo.png" alt="Logo" class="img-center"/>
+                    <form action="AddEvent" method="POST">
+                        Ime <input type="text" name="name" class="form-control" required autofocus />
+                        Datum <input type="date" name="date" class="form-control" required />
+                        Adresa <input type="text" name="place" class="form-control" required />
+                        Pocetak akcije <input type="text" name="startTime"  class="form-control" id="eventStart" required/>
+                        Kraj akcije <input type="text" name="endTime" class="form-control" id="eventEnd" required/>
+                        Broj volontera <input type="text" name="volonteurNumber" class="form-control" required />
+                        Trajanje u satima (automatski se popunjava)<input type="text" name="hoursDuration" class="form-control" id="hours" readonly />
+                        <input type="submit" value="Dodaj akciju" class="submit-button" />
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

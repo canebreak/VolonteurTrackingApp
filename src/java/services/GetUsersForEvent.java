@@ -30,7 +30,7 @@ public class GetUsersForEvent extends HttpServlet {
         List<User> userList = new ArrayList<User>();
 
         try {
-            con = DB.getInstance().getConnection();
+            con = DB.getConnection();
             stmt = con.createStatement();
 
             String query = "SELECT\n"

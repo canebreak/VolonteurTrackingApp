@@ -30,7 +30,7 @@ public class GetUser extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            conn = DB.getInstance().getConnection();
+            conn = DB.getConnection();
             
             stmt = conn.createStatement();
             

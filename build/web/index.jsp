@@ -5,12 +5,14 @@
     <head>
         <%@include  file="head.html" %>
         <link rel="stylesheet" href="css/login-css.css"/>
+        <script src="js/login.js"></script>
         <title>VTA | Login</title>
     </head>
     <body>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <img src="img/logo.png" alt="Logo" class="img-responsive"/>
+                <img src="img/logo.png" alt="Logo" class="img-center"/>
+                <h3 class="text-danger text-center" id="message">${message}</h3>
                 <form action="Login" method="POST">
                     Korisnicko ime: <input type="text" name="username" class="form-control" required/><br/>
                     Sifra: <input type="password" name="password" class="form-control" required/><br/>

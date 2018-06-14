@@ -31,7 +31,7 @@ public class GetEventsForUser extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            conn = DB.getInstance().getConnection();
+            conn = DB.getConnection();
             stmt = conn.createStatement();
             String query = "SELECT e.id, e.name, e.date, e.start_time, e.end_time,"
                     + " e.hours_duration, e.place"
