@@ -1,18 +1,28 @@
-
 package models;
 
 import java.util.Date;
 
 public class User {
+
     private int id;
     private String name, lastName, nickName;
     private Date birthday;
     private int totalHours;
     private int startYear;
     private String password;
-    private int isDeleted;
+    private int isDeleted, isAdmin;
 
-    public User(){}
+    public User() {
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public String getNickName() {
         return nickName;
     }
@@ -90,6 +100,4 @@ public class User {
         return "User{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", nickName=" + nickName + ", birthday=" + birthday + ", totalNumber=" + totalHours + ", startYear=" + startYear + ", password=" + password + ", isDeleted=" + isDeleted + '}';
     }
 
-    
 }
-

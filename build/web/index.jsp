@@ -1,5 +1,7 @@
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,13 +14,14 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <img src="img/logo.png" alt="Logo" class="img-center"/>
-                <h3 class="text-danger text-center" id="message">${message}</h3>
-                <form action="Login" method="POST">
-                    Korisnicko ime: <input type="text" name="username" class="form-control" required/><br/>
-                    Sifra: <input type="password" name="password" class="form-control" required/><br/>
-
-                    <input type="submit" class="submit-button" value="Login"/>
-                </form>
+                <h3 class="text-danger text-center" id="message">
+                    ${sessionScope.message}
+                </h3>
+                    <form action="Login" method="POST">
+                        Korisnicko ime: <input type="text" name="username" class="form-control" required/><br/>
+                        Sifra: <input type="password" name="password" class="form-control" required/><br/>
+                        <input type="submit" class="submit-button" value="Login"/>
+                    </form>
                 <br/>
                 <a href="register.jsp">Registrujte se</a>
             </div>

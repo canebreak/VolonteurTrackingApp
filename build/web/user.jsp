@@ -1,17 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<c:if test="${empty sessionScope.userEvents}" >
+    <jsp:forward page = "index.jsp"/>
+</c:if>
+
 <html>
     <head> 
-        <%@include  file="head.html" %>
+        <%@include file="head.html" %>
         <link rel="stylesheet" href="css/user.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>VTA | <c:out value="${sessionScope.userEvents.name }"/></title>
     </head>
     <body>
-        <c:if test="${empty sessionScope.userEvents}" >
-            <jsp:forward page = "index.jsp"/>
-        </c:if>
         <div class="container">
             <div class="row">
                 <img src="img/logo.png" alt="Logo" class="img-center"/>
@@ -73,4 +75,5 @@
             </div>
         </div>
     </body>
+
 </html>

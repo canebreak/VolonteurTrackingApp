@@ -1,4 +1,3 @@
-
 package rowmappers;
 
 import java.sql.ResultSet;
@@ -8,13 +7,12 @@ import java.util.logging.Logger;
 import models.Event;
 
 public class EventRowMapper {
-    
-    public static Event mapData(ResultSet rs){
-    
+
+    public static Event mapData(ResultSet rs) {
+
         Event event = null;
         try {
-            if(rs.next())
-            {
+            if (rs.next()) {
                 event = new Event();
                 event.setId(rs.getInt("id"));
                 event.setName(rs.getString("name"));

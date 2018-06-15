@@ -1,8 +1,12 @@
 package services;
 
+import db.DB;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +22,34 @@ public class AddEvent extends HttpServlet {
         Connection conn = null;
         Statement stmt = null;
 
+        String name = request.getParameter("name");
+        Date date = new Date();
+        String place = request.getParameter("place");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        int volonteurNumber = Integer.parseInt(request.getParameter("volonteurNumber"));
+        float hoursDuration = Float.parseFloat(request.getParameter("hoursDuration"));
+
+        try {
+            conn = DB.getConnection();
+            stmt = conn.createStatement();
+            String query = "INSERT INTO event (`name`, `date`, `start_time`,"
+                    + " `volonteur_number`, `end_time`, `hours_duration`,"
+                    + " `place`, `is_deleted`) VALUES"
+                    + " ('"+name+"', '"+date+"', '"+startTime+"', ''"+volonteurNumber+"'',"
+                    + " '"+endTime+"', '"+hoursDuration+"', '"+place+"', '0');";
+          
+            if(!stmt.execute(query))
+            {
+                System.out.println("Event not inserted for event: " + name);
+                response.sendRedirect("admin.jsp");
+            }
+        } catch (SQLException exc) {
+            System.out.println(exc.getMessage());
+        }
+
+            session.setAttribute("message", "Event inserted");
+            response.sendRedirect("new_event.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

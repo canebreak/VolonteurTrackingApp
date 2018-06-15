@@ -24,31 +24,31 @@ public class ChangePassword extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String newPasswordConfirm = request.getParameter("newPasswordConfirm");
 
-        UserEvents  userEvents= (UserEvents)session.getAttribute("userEvents");
+        UserEvents userEvents = (UserEvents) session.getAttribute("userEvents");
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
 
         if (oldPassword.equals(newPassword)) {
-            session.setAttribute("message", "Stara i nova sifra ne mogu biti iste");
+            session.setAttribute("message", "Stara i nova sifra ne mogu "
+                    + "biti iste");
             response.sendRedirect(address);
         }
         if (!newPassword.equals(newPasswordConfirm)) {
-            session.setAttribute("message", "Stara i nova sifra ne mogu biti iste");
+            session.setAttribute("message", "Nova sifra i potvrda sifre"
+                    + " ne mogu biti iste");
             response.sendRedirect(address);
         }
         try {
-            
-        con = DB.getConnection();
-        stmt = con.createStatement();
-        
-        String query = "Update user set password = '"+newPassword+"'"
-                + "where id="+userEvents.getId();
-        if(stmt.execute(query))
-        {
-            session.setAttribute("message", "Sifra uspesno promenjena");
-            response.sendRedirect(address);
-        }
+            con = DB.getConnection();
+            stmt = con.createStatement();
+
+            String query = "Update user set password = '" + newPassword + "'"
+                    + "where id=" + userEvents.getId();
+            if (stmt.execute(query)) {
+                session.setAttribute("message", "Sifra uspesno promenjena");
+                response.sendRedirect(address);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

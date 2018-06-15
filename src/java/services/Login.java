@@ -25,14 +25,11 @@ public class Login extends HttpServlet {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         try {
-
             conn = DB.getConnection();
-
             stmt = conn.createStatement();
 
             String query = "SELECT id, password, is_admin "
@@ -61,9 +58,9 @@ public class Login extends HttpServlet {
                             + " AND u.is_deleted = 0"
                             + " AND xref.user_id = "
                             + userId;
-
+                    
                     rs = stmt.executeQuery(query);
-
+                    
                     session.setAttribute("userEvents", UserEventSetExtractor.mapData(rs));
                     if (isAdmin == 0) {
                         address = "user.jsp";
@@ -71,20 +68,17 @@ public class Login extends HttpServlet {
                         address = "admin.jsp";
                     }
                 } else {
-                    request.setAttribute("message", "Pogresna sifra");
+                    session.setAttribute("message", "Pogrešna šifra");
                     System.out.println("Incorrect password");
                 }
             } else {
-                request.setAttribute("message", "Volonter ne postoji");
+                session.setAttribute("message", "Volonter ne postoji");
                 System.out.println("user does not exist");
-
-                request.getRequestDispatcher(address).forward(request, response);
             }
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }
         response.sendRedirect(address);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

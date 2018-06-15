@@ -1,4 +1,3 @@
-
 package rowmappers;
 
 import java.sql.ResultSet;
@@ -10,18 +9,15 @@ import models.Event;
 import models.UserEvents;
 
 public class UserEventSetExtractor {
-    
-    public static UserEvents mapData(ResultSet rs)
-    {
+
+    public static UserEvents mapData(ResultSet rs) {
         UserEvents userEvents = null;
-        
+
         try {
-            while(rs.next())
-            {
-                if(userEvents == null)
-                {
+            while (rs.next()) {
+                if (userEvents == null) {
                     userEvents = new UserEvents();
-                    
+
                     userEvents.setId(rs.getInt("id"));
                     userEvents.setName(rs.getString("user_name"));
                     userEvents.setLastName(rs.getString("last_name"));
@@ -38,17 +34,15 @@ public class UserEventSetExtractor {
                 event.setEndTime("end_time");
                 event.setDurationInHours(rs.getFloat("hours_duration"));
                 event.setPlace(rs.getString("place"));
-                
+
                 userEvents.getEvents().add(event);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserEventSetExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         return userEvents;
     }
-    
+
 }

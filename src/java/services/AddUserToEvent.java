@@ -1,47 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
+import db.DB;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Blagoje
- */
 public class AddUserToEvent extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddUserToEvent</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddUserToEvent at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        HttpSession session = request.getSession();
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int eventId = Integer.parseInt(request.getParameter("eventId"));
+        int hours = Integer.parseInt(request.getParameter("hours"));
+
+        try {
+            conn = DB.getConnection();
+            stmt = conn.createStatement();
+
+            String query = "INSERT INTO user_event_xref (hours, user_id, event_id, is_deleted)"
+                    + " VALUES (" + hours + ", " + userId + ", " + eventId + ", 0)";
+
+            if (stmt.execute(query)) {
+                System.out.println("User " + userId + " inserted for event: " + eventId);
+            }
+        } catch (SQLException exc) {
+            System.out.println(exc.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -12,6 +12,9 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <img src="img/logo.png" alt="Logo" class="img-center"/>
+                    <h3 class="text-danger text-center" id="message">
+                        ${sessionScope.message}
+                    </h3>
                     <form action="AddEvent" method="POST">
                         Ime <input type="text" name="name" class="form-control" required autofocus />
                         Datum <input type="date" name="date" class="form-control" required />
