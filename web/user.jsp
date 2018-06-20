@@ -1,8 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<c:if test="${empty sessionScope.userEvents}" >
+<c:if test="${empty sessionScope.userId}" >
     <jsp:forward page = "index.jsp"/>
 </c:if>
 
@@ -22,18 +22,19 @@
                         <div class="col-md-4 col-md-offset-4">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                    <p>Ime: <c:out value="${sessionScope.userEvents.name }"/></p>
-                                    <p>Prezime: <c:out value="${sessionScope.userEvents.lastName }"/></p>
-                                    <p>Datum rodjenja: <c:out value="${sessionScope.userEvents.birthday }"/></p>
-                                    <p>Broj sati: <c:out value="${sessionScope.userEvents.totalHours }"/></p>
-                                    <p>Godina pocetka: <c:out value="${sessionScope.userEvents.startYear }"/></p>
-                                    <p>Korisnicko ime: <c:out value="${sessionScope.userEvents.nickName }"/></p>
+                                    <p>Ime: <c:out value="${sessionScope.userEvents.name}"/></p>
+                                    <p>Prezime: <c:out value="${sessionScope.userEvents.lastName}"/></p>
+                                    <p>Datum rodjenja: <c:out value="${sessionScope.userEvents.birthday}"/></p>
+                                    <p>Broj sati: <c:out value="${sessionScope.userEvents.totalHours}"/></p>
+                                    <p>Godina pocetka: <c:out value="${sessionScope.userEvents.startYear}"/></p>
+                                    <p>Korisnicko ime: <c:out value="${sessionScope.userEvents.nickName}"/></p>
                                     <a href="change_password.jsp" class="btn btn-primary">Promeni sifru</a>
                                     <a href="Logout" class="btn btn-primary">Log out</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+   
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -46,29 +47,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr> <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr> 
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
+                            <c:forEach var="event" items="${sessionScope.events}" >
+                                <tr>
+                                    <td>${event.name}</td>
+                                    <td>${event.place}</td>
+                                    <td>${event.date}</td>
+                                    <td>${event.startTime}</td>
+                                    <td>${event.endTime}</td>
+                                    <td>${event.durationInHours}</td>
+
+                                </tr>
+                            </c:forEach>s
                         </tbody>
                     </table>
                 </div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.UserEvents;
 import rowmappers.UserEventSetExtractor;
 
 public class Login extends HttpServlet {
@@ -42,6 +43,9 @@ public class Login extends HttpServlet {
                 if (password.equals(rs.getString("password"))) {
                     userId = rs.getInt("id");
                     isAdmin = rs.getInt("is_admin");
+
+                    session.setAttribute("userId", userId);
+
                     query = "SELECT e.name event_name, e.date, e.start_time, e.end_time,"
                             + " e.hours_duration, e.place, u.id, u.name user_name, u.last_name,"
                             + " u.birthday, u.total_hours,"
@@ -61,9 +65,14 @@ public class Login extends HttpServlet {
 
                     rs = stmt.executeQuery(query);
 
-                    session.setAttribute("userEvents", UserEventSetExtractor.mapData(rs));
+                    UserEvents userEvents = UserEventSetExtractor.mapData(rs);
+
+                    if (userEvents != null) {
+                        session.setAttribute("userEvents", userEvents);
+                        session.setAttribute("events", userEvents.getEvents());
+                    }
+
                     if (isAdmin == 1) {
-                        session.setAttribute("adminId", userId);
                         address = "admin.jsp";
                     } else {
                         address = "user.jsp";
@@ -80,11 +89,11 @@ public class Login extends HttpServlet {
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }
-        
+
         response.sendRedirect(address);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

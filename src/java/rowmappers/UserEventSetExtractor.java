@@ -30,8 +30,8 @@ public class UserEventSetExtractor {
                 Event event = new Event();
                 event.setName(rs.getString("event_name"));
                 event.setDate(rs.getDate("date"));
-                event.setStartTime("start_time");
-                event.setEndTime("end_time");
+                event.setStartTime(rs.getString("start_time"));
+                event.setEndTime(rs.getString("end_time"));
                 event.setDurationInHours(rs.getFloat("hours_duration"));
                 event.setPlace(rs.getString("place"));
 

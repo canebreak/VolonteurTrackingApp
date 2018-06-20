@@ -5,9 +5,8 @@ import java.sql.Date;
 public class Event {
 
     private int id;
-    private String name, place;
+    private String name, place, startTime, endTime;
     private Date date;
-    private String startTime, endTime;
     private float durationInHours;
     private int volonteurNumber;
 
