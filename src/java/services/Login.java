@@ -58,15 +58,17 @@ public class Login extends HttpServlet {
                             + " AND u.is_deleted = 0"
                             + " AND xref.user_id = "
                             + userId;
-                    
+
                     rs = stmt.executeQuery(query);
-                    
+
                     session.setAttribute("userEvents", UserEventSetExtractor.mapData(rs));
-                    if (isAdmin == 0) {
-                        address = "user.jsp";
-                    } else {
+                    if (isAdmin == 1) {
+                        session.setAttribute("adminId", userId);
                         address = "admin.jsp";
+                    } else {
+                        address = "user.jsp";
                     }
+                    System.out.println(address + ": <<<ADRESA");
                 } else {
                     session.setAttribute("message", "Pogrešna šifra");
                     System.out.println("Incorrect password");
@@ -78,6 +80,7 @@ public class Login extends HttpServlet {
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }
+        
         response.sendRedirect(address);
     }
 

@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<c:if test="${empty sessionScope.userEvents}" >
+<!--
+<c:if test="${empty sessionScope.adminId}" >
     <jsp:forward page = "index.jsp"/>
 </c:if>
-
+-->
 <html>
     <head>
         <%@include  file="head.html" %>

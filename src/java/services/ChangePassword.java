@@ -33,6 +33,10 @@ public class ChangePassword extends HttpServlet {
             session.setAttribute("message", "Stara i nova sifra ne mogu "
                     + "biti iste");
             response.sendRedirect(address);
+        }if (!newPassword.equals(newPasswordConfirm)) {
+            session.setAttribute("message", "Nova sifra i potvrda sifre"
+                    + " ne mogu biti iste");
+            response.sendRedirect(address);
         }
         if (!newPassword.equals(newPasswordConfirm)) {
             session.setAttribute("message", "Nova sifra i potvrda sifre"

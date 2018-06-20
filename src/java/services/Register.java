@@ -22,7 +22,6 @@ public class Register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
 
-        DB db = null;
         Connection con = null;
         Statement stmt = null;
 
@@ -37,15 +36,26 @@ public class Register extends HttpServlet {
         user.setLastName(request.getParameter("lastName"));
         user.setBirthday(date);
         user.setStartYear(Integer.parseInt(request.getParameter("startYear")));
-        user.setNickName(request.getParameter("nickName"));
+        user.setNickName(request.getParameter("nickname"));
         user.setPassword(request.getParameter("password"));
 
-
         System.out.println(user);
+
         try {
-            con = db.getConnection();
+            con = DB.getConnection();
+
             stmt = con.createStatement();
-            //TODO: Date is inserted as zeroes check THIS
+            
+            String query = "SELECT *"
+                    + "FROM users"
+                    + "WHERE nickname='"+user.getNickName()+"';";
+        } catch (SQLException exc) {
+        }
+
+        try {
+            con = DB.getConnection();
+            stmt = con.createStatement();
+            //TODO: Date is inserted as zeroes
             String query = "INSERT INTO user (id, name, last_name, birthday,"
                     + " total_hours, start_year, password, isDeleted, isAdmin, nickname)"
                     + " VALUES ('" + user.getName() + "', '" + user.getLastName() + "'"
