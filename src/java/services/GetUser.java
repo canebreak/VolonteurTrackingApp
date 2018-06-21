@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
+import rowmappers.UserRowMapper;
 
 public class GetUser extends HttpServlet {
 
@@ -23,40 +24,32 @@ public class GetUser extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        User user = new User();
-                
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
 
         try {
             conn = DB.getConnection();
-            
+
             stmt = conn.createStatement();
-            
+
             String query = "Select id, name, last_name, birthday, total_hours, "
                     + "start_year, nickname"
                     + "from users"
-                    + "where id ="+userId;
-            
+                    + "where id =" + userId;
+
             rs = stmt.executeQuery(query);
-            if(rs.next())
-            {
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setTotalHours(rs.getInt("total_hours"));
-                user.setStartYear(rs.getInt("start_year"));
-                user.setNickName(rs.getString("nickname"));
+            if (rs.next()) {
+                return UserRowMapper.mapData(rs);
             }
+
         } catch (SQLException exc) {
             exc.getMessage();
         }
-        
-        return user;
+        return null;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

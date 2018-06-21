@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,32 +28,38 @@ public class AddEvent extends HttpServlet {
 
         String name = request.getParameter("name");
         Date date = new Date();
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+        } catch (ParseException ex) {
+            Logger.getLogger(AddEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String place = request.getParameter("place");
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         int volonteurNumber = Integer.parseInt(request.getParameter("volonteurNumber"));
         float hoursDuration = Float.parseFloat(request.getParameter("hoursDuration"));
-
-        try {
+        
+        try 
+        {
             conn = DB.getConnection();
             stmt = conn.createStatement();
             String query = "INSERT INTO event (`name`, `date`, `start_time`,"
                     + " `volonteur_number`, `end_time`, `hours_duration`,"
                     + " `place`, `is_deleted`) VALUES"
-                    + " ('"+name+"', '"+date+"', '"+startTime+"', ''"+volonteurNumber+"'',"
-                    + " '"+endTime+"', '"+hoursDuration+"', '"+place+"', '0');";
+                    + " ('"+name+"', '"+date+"', '"+startTime+"', "+volonteurNumber+","
+                    + " '"+endTime+"', "+hoursDuration+", '"+place+"', 0);";
           
             if(!stmt.execute(query))
             {
                 System.out.println("Event not inserted for event: " + name);
                 response.sendRedirect("admin.jsp");
-            }
+            }else{
+                        session.setAttribute("message", "Akcija dodata");
+            response.sendRedirect("new_event.jsp");}
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }
 
-            session.setAttribute("message", "Event inserted");
-            response.sendRedirect("new_event.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

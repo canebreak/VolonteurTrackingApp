@@ -1,8 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<c:if test="${empty sessionScope.userId}" >
-    <jsp:forward page = "index.jsp"/>
-</c:if>
 <html>
     <head>
     <c:import url="head.html"></c:import>   

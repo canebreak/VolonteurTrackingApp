@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import rowmappers.EventRowMapper;
+import rowmappers.EventsRowMapper;
 
 public class GetEvents extends HttpServlet {
 
@@ -22,18 +22,21 @@ public class GetEvents extends HttpServlet {
 
         Connection conn = null;
         Statement stmt = null;
-        ResultSet rs = null;
+        ResultSet rs = null; 
+       String address = "all_events.jsp";
         
         try {
             conn = DB.getConnection();
             stmt = conn.createStatement();
 
-            String query = "SELECT id, name, date, start_time, volonteur_number,"
+            String query = "SELECT id, name, date, start_time, count(volonteur_number) volonteur_number,"
                     + " end_time, hours_duration, place"
-                    + " FROM event"
+                    + " FROM event e"
                     + " WHERE is_deleted = 0";
 
-            session.setAttribute("events", EventRowMapper.mapData(rs));
+            rs = stmt.executeQuery(query);
+            session.setAttribute("events", EventsRowMapper.mapData(rs));
+            response.sendRedirect(address);
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }

@@ -17,7 +17,6 @@ public class EventsRowMapper {
         try {
             while(rs.next()){
                 Event event = new Event();
-                
                 event.setId(rs.getInt("id"));
                 event.setName(rs.getString("name"));
                 event.setDate(rs.getDate("date"));
@@ -25,9 +24,8 @@ public class EventsRowMapper {
                 event.setVolonteurNumber(rs.getInt("volonteur_number"));
                 event.setEndTime(rs.getString("end_time"));
                 event.setPlace(rs.getString("place"));
-                      
+                event.setDurationInHours(rs.getFloat("hours_duration"));
                 eventsList.add(event);
-                
                 
             }} catch (SQLException ex) {
             Logger.getLogger(EventsRowMapper.class.getName()).log(Level.SEVERE, null, ex);

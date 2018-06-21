@@ -14,20 +14,22 @@ import javax.servlet.http.HttpSession;
 import db.DB;
 import java.sql.SQLException;
 import models.User;
+import rowmappers.UsersRowMapper;
 
 public class GetUsersForEvent extends HttpServlet {
 
-    protected List<User> processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         int eventId = Integer.parseInt(request.getParameter("eventId"));
 
-        Connection con;
-        Statement stmt;
-        ResultSet rs;
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         HttpSession session = request.getSession();
+        String address = "event_users.jsp";
 
-        List<User> userList = new ArrayList<User>();
+        List<User> userList = new ArrayList<>();
 
         try {
             con = DB.getConnection();
@@ -38,35 +40,30 @@ public class GetUsersForEvent extends HttpServlet {
                     + "    u.name,\n"
                     + "    u.last_name,\n"
                     + "    u.birthday,\n"
-                    + "    u.total_hours,\n"
+                    + "    xref.hours as total_hours,\n"
                     + "    u.start_year,\n"
                     + "    u.nickname\n"
                     + "FROM\n"
                     + "    USER AS u\n"
                     + "LEFT JOIN user_event_xref AS xref\n"
                     + "ON\n"
-                    + "u.id = xref.user_id\n"
-                    + "where xref.event_id = " + eventId;
+                    + "    u.id = xref.user_id\n"
+                    + "LEFT JOIN EVENT AS e\n"
+                    + "ON\n"
+                    + "    xref.event_id = e.id\n"
+                    + "WHERE\n"
+                    + "    xref.is_deleted = 0 AND "
+                    + "e.is_deleted = 0 AND "
+                    + "xref.event_id ="+eventId;
 
             rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setBirthday(rs.getDate("birthday"));
-                user.setTotalHours(rs.getInt("total_hours"));
-                user.setStartYear(rs.getInt("start_year"));
-                user.setNickName(rs.getString("nickname"));
 
-                userList.add(user);
-            }
-            session.setAttribute("userList", userList);
+            session.setAttribute("userList", UsersRowMapper.mapData(rs));
         } catch (SQLException exc) {
             System.out.println(exc.getMessage());
         }
 
-        return userList;
+        response.sendRedirect(address);
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

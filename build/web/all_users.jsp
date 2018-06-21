@@ -16,37 +16,24 @@
                         <thead>
                             <tr>
                                 <th>Ime</th>
-                                <th>Mesto</th>
-                                <th>Datum</th>
-                                <th>Pocetak</th>
-                                <th>Kraj</th>
-                                <th>Trajanje</th>
+                                <th>Prezime</th>
+                                <th>Datum rodjenja</th>
+                                <th>Angazovanost</th>
+                                <th>Godina pocetka</th>
+                                <th>Korisnicko ime</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr> <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr> 
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
+                           <c:forEach var="user" items="${sessionScope.userList}" >
+                             <tr>
+                                <td>${user.name}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.birthday}</td>
+                                <td>${user.totalHours}</td>
+                                <td>${user.startYear}</td>s
+                                <td>${user.nickName}</td>
                             </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -54,3 +41,4 @@
         </div>
     </body>
 </html>
+

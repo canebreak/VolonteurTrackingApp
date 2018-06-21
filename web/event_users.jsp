@@ -24,13 +24,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <c:forEach var="user" items="${sessionScope.userList}" >
+                           <c:forEach var="user" items="${sessionScope.userList}">
                              <tr>
                                 <td>${user.name}</td>
                                 <td>${user.lastName}</td>
                                 <td>${user.birthday}</td>
                                 <td>${user.totalHours}</td>
-                                <td>${user.startYear}</td>s
+                                <td>${user.startYear}</td>
                                 <td>${user.nickName}</td>
                             </tr>
                         </c:forEach>

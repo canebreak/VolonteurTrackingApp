@@ -25,17 +25,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="current" items="${sessionScope.events}" >
-                                <tr>
-                                    <td>${current.name}</td>
-                                    <td>${current.date}</td>
-                                    <td>${current.startTime}</td>
-                                    <td>${current.place}</td>
-                                    <td>${current.endTime}</td>
-                                    <td>${current.durationInHours}</td>
-                                    <td>${current.volonteurNumber}</td>
-                                </tr>
-                            </c:forEach>
+                            <c:forEach var="event" items="${sessionScope.events}" >
+                             <tr>
+                                <td>
+                                    <a href="GetUsersForEvent?eventId=${event.id}">${event.name}</a>
+                                </td>
+                                <td>${event.place}</td>
+                                <td>${event.date}</td>
+                                <td>${event.startTime}</td>
+                                <td>${event.endTime}</td>
+                                <td>${event.durationInHours}</td>
+                                <td>${event.volonteurNumber}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

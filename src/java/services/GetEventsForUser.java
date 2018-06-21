@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Event;
+import rowmappers.EventsRowMapper;
 
 public class GetEventsForUser extends HttpServlet {
 
@@ -46,10 +47,7 @@ public class GetEventsForUser extends HttpServlet {
                     + userId;
             rs = stmt.executeQuery(query);
             
-            
-            while(rs.next())
-            {
-            }
+           session.setAttribute("eventsList", EventsRowMapper.mapData(rs));
         } catch (SQLException exc) {
             exc.getMessage();
         }

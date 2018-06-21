@@ -17,10 +17,6 @@
         <servlet-class>services.GetUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetUsersForSpecificEvent</servlet-name>
-        <servlet-class>services.GetUsersForEvent</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GetEventsForUser</servlet-name>
         <servlet-class>services.GetEventsForUser</servlet-class>
     </servlet>
@@ -48,6 +44,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>services.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUsersForEvent</servlet-name>
+        <servlet-class>services.GetUsersForEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -63,10 +63,6 @@
     <servlet-mapping>
         <servlet-name>GetUser</servlet-name>
         <url-pattern>/GetUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetUsersForSpecificEvent</servlet-name>
-        <url-pattern>/GetUsersForSpecificEvent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetEventsForUser</servlet-name>
@@ -95,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUsersForEvent</servlet-name>
+        <url-pattern>/GetUsersForEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

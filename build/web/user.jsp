@@ -22,19 +22,19 @@
                         <div class="col-md-4 col-md-offset-4">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                    <p>Ime: <c:out value="${sessionScope.userEvents.name}"/></p>
-                                    <p>Prezime: <c:out value="${sessionScope.userEvents.lastName}"/></p>
-                                    <p>Datum rodjenja: <c:out value="${sessionScope.userEvents.birthday}"/></p>
-                                    <p>Broj sati: <c:out value="${sessionScope.userEvents.totalHours}"/></p>
-                                    <p>Godina pocetka: <c:out value="${sessionScope.userEvents.startYear}"/></p>
-                                    <p>Korisnicko ime: <c:out value="${sessionScope.userEvents.nickName}"/></p>
+                                    <p><strong>Ime:</strong> <c:out value="${sessionScope.userEvents.name}"/></p>
+                                    <p><strong>Prezime:</strong> <c:out value="${sessionScope.userEvents.lastName}"/></p>
+                                    <p><strong>Datum rodjenja:</strong> <c:out value="${sessionScope.userEvents.birthday}"/></p>
+                                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.userEvents.totalHours}"/></p>
+                                    <p><strong>Godina pocetka:</strong> <c:out value="${sessionScope.userEvents.startYear}"/></p>
+                                    <p><strong>Korisnicko ime:</strong> <c:out value="${sessionScope.userEvents.nickName}"/></p>
                                     <a href="change_password.jsp" class="btn btn-primary">Promeni sifru</a>
                                     <a href="Logout" class="btn btn-primary">Log out</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-   
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -43,7 +43,7 @@
                                 <th>Datum</th>
                                 <th>Pocetak</th>
                                 <th>Kraj</th>
-                                <th>Trajanje</th>
+                                <th>Prisustvo u casovima</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,14 +55,16 @@
                                     <td>${event.startTime}</td>
                                     <td>${event.endTime}</td>
                                     <td>${event.durationInHours}</td>
-
                                 </tr>
-                            </c:forEach>s
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <br/><br/>
+        <footer class="footer">
+            test
+        </footer>
     </body>
-
 </html>

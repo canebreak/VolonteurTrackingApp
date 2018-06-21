@@ -9,25 +9,20 @@ import java.util.logging.Logger;
 import models.User;
 
 public class UsersRowMapper {
-    
-    public static List<User> mapData(ResultSet rs){
-        
+
+    public static List<User> mapData(ResultSet rs) {
+
         List<User> userList = new ArrayList<>();
-        
+
         try {
-            while(rs.next())
-            {
+            while (rs.next()) {
                 User user = new User();
-                
-                user.setId(rs.getInt("id"));
-                user.setName("name");
+                user.setName(rs.getString("name"));
                 user.setLastName(rs.getString("last_name"));
-                user.setBirthday(rs.getDate("bithday"));
-                user.setTotalHours(rs.getInt("total_hours"));
+                user.setBirthday(rs.getDate("birthday"));
+                user.setTotalHours(rs.getFloat("total_hours"));
                 user.setStartYear(rs.getInt("start_year"));
-                user.setIsAdmin(rs.getInt("is_admin"));
                 user.setNickName(rs.getString("nickname"));
-                
                 userList.add(user);
             }
         } catch (SQLException ex) {

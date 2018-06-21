@@ -7,7 +7,7 @@ public class User {
     private int id;
     private String name, lastName, nickName;
     private Date birthday;
-    private int totalHours;
+    private float totalHours;
     private int startYear;
     private String password;
     private int isDeleted, isAdmin;
@@ -63,11 +63,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public int getTotalHours() {
+    public float getTotalHours() {
         return totalHours;
     }
 
-    public void setTotalHours(int totalHours) {
+    public void setTotalHours(float totalHours) {
         this.totalHours = totalHours;
     }
 

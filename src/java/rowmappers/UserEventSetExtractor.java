@@ -12,7 +12,7 @@ public class UserEventSetExtractor {
 
     public static UserEvents mapData(ResultSet rs) {
         UserEvents userEvents = null;
-
+        float hours = 0;
         try {
             while (rs.next()) {
                 if (userEvents == null) {
@@ -22,26 +22,30 @@ public class UserEventSetExtractor {
                     userEvents.setName(rs.getString("user_name"));
                     userEvents.setLastName(rs.getString("last_name"));
                     userEvents.setBirthday(rs.getDate("birthday"));
-                    userEvents.setTotalHours(rs.getInt("total_hours"));
                     userEvents.setStartYear(rs.getInt("start_year"));
                     userEvents.setNickName(rs.getString("nickname"));
-                    userEvents.setEvents(new ArrayList<Event>());
+                    userEvents.setEvents(new ArrayList<>());
                 }
                 Event event = new Event();
                 event.setName(rs.getString("event_name"));
                 event.setDate(rs.getDate("date"));
                 event.setStartTime(rs.getString("start_time"));
                 event.setEndTime(rs.getString("end_time"));
-                event.setDurationInHours(rs.getFloat("hours_duration"));
+                event.setDurationInHours(rs.getFloat("hours"));
+                hours += rs.getFloat("hours");
+                System.out.println("hours: " + rs.getFloat("hours"));
                 event.setPlace(rs.getString("place"));
 
                 userEvents.getEvents().add(event);
-
+            }
+            if (userEvents == null) {
+                return null;
+            } else {
+                userEvents.setTotalHours(hours);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserEventSetExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return userEvents;
     }
 
