@@ -14,3 +14,13 @@
     border-radius: 3px;
     margin-top: 20px;
 }
+.add-user{
+    width: 100%;
+}
+.btn-get-available-users{
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+}

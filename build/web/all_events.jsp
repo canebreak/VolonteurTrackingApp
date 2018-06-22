@@ -4,6 +4,7 @@
 <html>
     <head>
         <%@include  file="head.html" %>
+        <script src="js/get-all-users-ajax.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VTA | Sve akcije</title>
     </head>
@@ -21,7 +22,7 @@
                                 <th>Mesto</th>
                                 <th>Kraj akcije</th>
                                 <th>Trajanje u satima</th>
-                                <th>Broj volontera</th>
+                                <th>Dodaj volontera</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,7 +36,8 @@
                                 <td>${event.startTime}</td>
                                 <td>${event.endTime}</td>
                                 <td>${event.durationInHours}</td>
-                                <td>${event.volonteurNumber}</td>
+                                <td><select class="add-user" data-event-id></select>
+                                    <button class="btn-get-available-users" data-eventid="${event.id}">Slobodni volonteri</button></td>
                             </tr>
                         </c:forEach>
                         </tbody>

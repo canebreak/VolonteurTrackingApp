@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetUsersForEvent.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/all_users.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/user.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetEvents.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetUsers.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/models/User.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetUser.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/AddEvent.java</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetAvailableUsersForEvent.java</file>
             <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/all_events.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/event_users.jsp</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetEventsForUser.java</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/js/get-all-users-ajax.js</file>
         </group>
     </open-files>
 </project-private>

@@ -29,7 +29,7 @@ public class GetEvents extends HttpServlet {
             conn = DB.getConnection();
             stmt = conn.createStatement();
 
-            String query = "SELECT id, name, date, start_time, count(volonteur_number) volonteur_number,"
+            String query = "SELECT id, name, date, start_time, volonteur_number,"
                     + " end_time, hours_duration, place"
                     + " FROM event e"
                     + " WHERE is_deleted = 0";
