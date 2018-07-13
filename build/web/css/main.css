@@ -18,7 +18,14 @@
     width: 100%;
 }
 .btn-get-available-users{
-    width: 100%;
+    width: 47%;
+    color: #333;
+    background-color: #fff;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+}
+.btn-add-selected-user{
+    width: 50%;
     color: #333;
     background-color: #fff;
     margin-top: 5px;
@@ -29,4 +36,15 @@
 }
 .delete-event-btn:hover{
     color: red;
+}
+.hours-input{
+    width: 50px;
+}
+.notification{
+    height: 40px;
+    width: 150px;
+    border-radius: 5px;
+    position: fixed;
+    right: 0;
+    margin: 10px;
 }

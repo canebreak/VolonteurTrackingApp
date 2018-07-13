@@ -9,6 +9,8 @@
         <title>VTA | Sve akcije</title>
     </head>
     <body>
+        <div class="notification">
+</div>
         <div class="container">
             <div class="row">
                 <img src="img/logo.png" alt="Logo" class="img-center"/>
@@ -16,7 +18,6 @@
                     ${sessionScope.message}
                 </h3>
                 <div class="col-md-10 col-md-offset-1">
-
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -27,6 +28,7 @@
                                 <th>Kraj akcije</th>
                                 <th>Trajanje u satima</th>
                                 <th>Dodaj volontera</th>
+                                <th>Broj sati</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,8 +43,12 @@
                                     <td>${event.startTime}</td>
                                     <td>${event.endTime}</td>
                                     <td>${event.durationInHours}</td>
-                                    <td><select class="add-user" data-event-id></select>
-                                        <button class="btn-get-available-users" data-eventid="${event.id}">Slobodni volonteri</button></td>
+                                    <td style="width:250px">
+                                        <select class="add-user" id="select-${event.id}"></select>
+                                        <button class="btn-get-available-users" data-eventid="${event.id}">Vidi slobodne</button>
+                                        <button class="btn-add-selected-user" data-eventid="${event.id}">Dodaj izabranog</button>
+                                    </td>
+                                    <td><input type="number" class="hours-input" id="hours-${event.id}"/></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

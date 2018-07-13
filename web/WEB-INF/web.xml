@@ -34,7 +34,11 @@
     </servlet>
     <servlet>
         <servlet-name>GetAvailableUsersForEvent</servlet-name>
-        <servlet-class>rowmappers.GetAvailableUsersForEvent</servlet-class>
+        <servlet-class>services.GetAvailableUsersForEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserToEvent</servlet-name>
+        <servlet-class>services.AddUserToEvent</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>GetAvailableUsersForEvent</servlet-name>
         <url-pattern>/GetAvailableUsersForEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserToEvent</servlet-name>
+        <url-pattern>/AddUserToEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

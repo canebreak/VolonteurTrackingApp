@@ -1,19 +1,60 @@
 
 package services;
 
+import com.google.gson.Gson;
+import db.DB;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.ResourceHelper;
+import models.User;
 
-
-public class GetUsersForEvent extends HttpServlet {
+public class GetAvailableUsersForEvent extends HttpServlet {
 
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
+        String id = request.getParameter("eventId");
+        int eventId = Integer.parseInt(request.getParameter("eventId"));
+        
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<User> availableUsers = new ArrayList<>();
+        
+        try{
+            con = DB.getConnection();
+            stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/getAvailableUsersForEvent.sql"));
+            stmt.setInt(1, eventId);
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                User user = new User();
+                
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setBirthday(rs.getDate("birthday"));
+                
+                availableUsers.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetAvailableUsersForEvent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String arrayTOJson = new Gson().toJson(availableUsers);
+        response.getWriter().write(arrayTOJson);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

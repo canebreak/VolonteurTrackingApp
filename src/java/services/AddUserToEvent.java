@@ -1,15 +1,11 @@
+package services;
 
-package rowmappers;
-
-import com.google.gson.Gson;
 import db.DB;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,45 +13,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.ResourceHelper;
-import models.User;
 
-public class GetAvailableUsersForEvent extends HttpServlet {
+public class AddUserToEvent extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        String id = request.getParameter("eventId");
+
         int eventId = Integer.parseInt(request.getParameter("eventId"));
-        
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int hours = Integer.parseInt(request.getParameter("hours"));
+
         Connection con = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<User> availableUsers = new ArrayList<>();
-        
-        try{
+        try {
             con = DB.getConnection();
-            stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/getAvailableUsersForEvent.sql"));
-            stmt.setInt(1, eventId);
-            
-            rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                User user = new User();
-                
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setBirthday(rs.getDate("birthday"));
-                
-                availableUsers.add(user);
-            }
+            stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/addUserToEvent.sql"));
+            stmt.setInt(1, hours);
+            stmt.setInt(2, userId);
+            stmt.setInt(3, eventId);
+
+            stmt.execute();
+            System.out.println("User with id:" + userId + " added to event with id: " + eventId);
+
         } catch (SQLException ex) {
-            Logger.getLogger(GetAvailableUsersForEvent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddUserToEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(new Gson().toJson(availableUsers));   
-        String arrayTOJson = new Gson().toJson(availableUsers);
-        response.getWriter().write(arrayTOJson);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
