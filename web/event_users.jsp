@@ -5,7 +5,7 @@
     <head>
         <%@include  file="head.html" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>VTA | All users</title>
+        <title>VTA | Svi korisnici</title>
     </head>
     <body>
         <div class="container">
@@ -24,16 +24,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <c:forEach var="user" items="${sessionScope.userList}">
-                             <tr>
-                                <td>${user.name}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.birthday}</td>
-                                <td>${user.totalHours}</td>
-                                <td>${user.startYear}</td>
-                                <td>${user.nickName}</td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach var="user" items="${sessionScope.user}">
+                                <tr>
+                                    <td>${user.name}</td>
+                                    <td>${user.lastName}</td>
+                                    <td>${user.birthday}</td>
+                                    <td>${user.totalHours}</td>
+                                    <td>${user.startYear}</td>
+                                    <td>${user.username}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

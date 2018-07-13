@@ -9,10 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Event;
 
+
 public class EventsRowMapper {
     
     public static List<Event> mapData(ResultSet rs){
-        List<Event> eventsList = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
+        
         
         try {
             while(rs.next()){
@@ -21,17 +23,18 @@ public class EventsRowMapper {
                 event.setName(rs.getString("name"));
                 event.setDate(rs.getDate("date"));
                 event.setStartTime(rs.getString("start_time"));
-                event.setVolonteurNumber(rs.getInt("volonteur_number"));
                 event.setEndTime(rs.getString("end_time"));
                 event.setPlace(rs.getString("place"));
                 event.setDurationInHours(rs.getFloat("hours_duration"));
-                eventsList.add(event);
                 
-            }} catch (SQLException ex) {
+                events.add(event);
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(EventsRowMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
-       return eventsList;
+        
+        return events;
     }
 }

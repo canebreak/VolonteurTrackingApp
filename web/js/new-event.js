@@ -11,16 +11,16 @@ function countHours()
     let eventStartArray = eventStart.split(":");
     let eventEndArray = eventEnd.split(":");
 
-    if (eventStart === "" || eventEnd === "")
+    if (eventStart === "" || eventEnd === "") {
+        return;
+    }
+    if (isNaN(eventStartArray[0]) || isNaN(eventEndArray[0])) {
         return;
 
-    if (isNaN(eventStartArray[0]) || isNaN(eventEndArray[0]))
-        return;
+    }
 
     let minutes = Math.abs((eventStartArray[0] * 60 + parseInt(eventStartArray[1]))
             - (eventEndArray[0] * 60 + parseInt(eventEndArray[1])));
-
-    console.log(Math.floor(minutes / 60) + ":" + minutes % 60);
 
     hoursInput.val(Math.round(minutes / 60));
 

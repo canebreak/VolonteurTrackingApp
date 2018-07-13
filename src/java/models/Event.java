@@ -7,7 +7,7 @@ public class Event {
     private int id;
     private String name, place, startTime, endTime;
     private Date date;
-    private float durationInHours;
+    private float hoursDuration;
     private int volonteurNumber;
 
     public String getPlace() {
@@ -35,11 +35,11 @@ public class Event {
     }
 
     public float getDurationInHours() {
-        return durationInHours;
+        return hoursDuration;
     }
 
     public void setDurationInHours(float durationInHours) {
-        this.durationInHours = durationInHours;
+        this.hoursDuration = durationInHours;
     }
     private int isDeleted;
 

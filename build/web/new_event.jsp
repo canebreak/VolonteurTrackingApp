@@ -21,7 +21,6 @@
                         Adresa <input type="text" name="place" class="form-control" required />
                         Pocetak akcije <input type="text" name="startTime"  class="form-control" id="eventStart" required/>
                         Kraj akcije <input type="text" name="endTime" class="form-control" id="eventEnd" required/>
-                        Broj volontera <input type="text" name="volonteurNumber" class="form-control" required />
                         Trajanje u satima (automatski se popunjava)<input type="text" name="hoursDuration" class="form-control" id="hours" readonly />
                         <input type="submit" value="Dodaj akciju" class="submit-button" />
                     </form>

@@ -17,7 +17,7 @@
                     Godina pocetka volontiranja: <input type="text" name="startYear" class="form-control" required/><br/>
                     Korisnicko ime (koristi se za logovanje): <input type="text" name="nickname" class="form-control" required/><br/>
                     Sifra <input type="password" name="password" class="form-control" required/><br/>
-                    <input type="submit" class="submit-button" value="Login"/>
+                    <input type="submit" class="submit-button" value="Register"/>
                 </form>
             </div>
         </div>

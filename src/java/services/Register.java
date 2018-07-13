@@ -3,78 +3,62 @@ package services;
 import db.DB;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.User;
+import models.ResourceHelper;
 
 public class Register extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
 
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastName");
+        Date birthday = new Date(0);
+        try {
+            new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"))
+                    .toInstant().atZone( ZoneId.of( "Africa/Tunis" )).toLocalDate() ;
+
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        int startYear = Integer.parseInt(request.getParameter("startYear"));
+        String username = request.getParameter("username"); //TODO:// check if username already exist
+        String password = request.getParameter("password");
+        
         Connection con = null;
-        Statement stmt = null;
-
-        String address = "login.jsp";
-        HttpSession session = request.getSession();
-
-        String birthday = request.getParameter("birthday");
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-
-        User user = new User();
-        user.setName(request.getParameter("name"));
-        user.setLastName(request.getParameter("lastName"));
-        user.setBirthday(date);
-        user.setStartYear(Integer.parseInt(request.getParameter("startYear")));
-        user.setNickName(request.getParameter("nickname"));
-        user.setPassword(request.getParameter("password"));
-
-        System.out.println(user);
-
-        try {
+        PreparedStatement stmt = null;
+        String query = ResourceHelper.getResourceText("/sql/insertNewUser.sql");
+        try{
             con = DB.getConnection();
-
-            stmt = con.createStatement();
+            stmt = con.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.setString(2, lastName);
+            stmt.setDate(3, birthday);
+            stmt.setInt(4, startYear);
+            stmt.setString(5, password);
+            stmt.setString(6, username);
             
-            String query = "SELECT *"
-                    + "FROM users"
-                    + "WHERE nickname='"+user.getNickName()+"';";
-        } catch (SQLException exc) {
-        }
-
-        try {
-            con = DB.getConnection();
-            stmt = con.createStatement();
-            //TODO: Date is inserted as zeroes
-            String query = "INSERT INTO user (id, name, last_name, birthday,"
-                    + " total_hours, start_year, password, isDeleted, isAdmin, nickname)"
-                    + " VALUES ('" + user.getName() + "', '" + user.getLastName() + "'"
-                    + ",'" + user.getBirthday() + "', 0, " + user.getStartYear() + ","
-                    + " '" + user.getPassword() + "', 0, 0, '" + user.getNickName() + "')";
-
-            System.out.println(query);
-            if (stmt.execute(query)) {
-                response.sendRedirect(address);
-            } else {
-                address = "index.jsp";
-                session.setAttribute("message", "Nesto se desilo pokusajte kasnije");
-            }
-
+            stmt.execute(query);
+            
+            request.getSession().setAttribute("message", "Korisnik dodat");
+            
         } catch (SQLException ex) {
-            ex.getMessage();
+                        request.getSession().setAttribute("message", "Nesto nije u redu,"
+                                + " kontaktirajte administratora");
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect(address);
-
+        response.sendRedirect("index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,11 +73,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -107,11 +87,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -2,16 +2,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<c:if test="${empty sessionScope.userId}" >
-    <jsp:forward page = "index.jsp"/>
-</c:if>
+<!-- C:if -->
 
 <html>
     <head> 
         <%@include file="head.html" %>
         <link rel="stylesheet" href="css/user.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>VTA | <c:out value="${sessionScope.userEvents.name }"/></title>
+        <title>VTA | <c:out value="${sessionScope.user.name}" />
+</title>
     </head>
     <body>
         <div class="container">
@@ -22,12 +21,12 @@
                         <div class="col-md-4 col-md-offset-4">
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
-                                    <p><strong>Ime:</strong> <c:out value="${sessionScope.userEvents.name}"/></p>
-                                    <p><strong>Prezime:</strong> <c:out value="${sessionScope.userEvents.lastName}"/></p>
-                                    <p><strong>Datum rodjenja:</strong> <c:out value="${sessionScope.userEvents.birthday}"/></p>
-                                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.userEvents.totalHours}"/></p>
-                                    <p><strong>Godina pocetka:</strong> <c:out value="${sessionScope.userEvents.startYear}"/></p>
-                                    <p><strong>Korisnicko ime:</strong> <c:out value="${sessionScope.userEvents.nickName}"/></p>
+                                    <p><strong>Ime:</strong> <c:out value="${sessionScope.user.name}" /></p>
+                                    <p><strong>Prezime:</strong> <c:out value="${sessionScope.user.lastName}" /></p>
+                                    <p><strong>Datum rodjenja:</strong><c:out value="${sessionScope.user.birthday}" /></p>
+                                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.user.totalHours}" /></p>
+                                    <p><strong>Godina pocetka:</strong> <c:out value="${sessionScope.user.startYear}" /></p>
+                                    <p><strong>Korisnicko ime:</strong> <c:out value="${sessionScope.user.username}" /></p>
                                     <a href="change_password.jsp" class="btn btn-primary">Promeni sifru</a>
                                     <a href="Logout" class="btn btn-primary">Log out</a>
                                 </div>
@@ -47,7 +46,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="event" items="${sessionScope.events}" >
+                            <c:forEach items="${sessionScope.events}" var="event" >
                                 <tr>
                                     <td>${event.name}</td>
                                     <td>${event.place}</td>
@@ -56,7 +55,7 @@
                                     <td>${event.endTime}</td>
                                     <td>${event.durationInHours}</td>
                                 </tr>
-                            </c:forEach>
+                                </c:forEach>
                         </tbody>
                     </table>
                 </div>

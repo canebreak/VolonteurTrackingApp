@@ -12,7 +12,11 @@
         <div class="container">
             <div class="row">
                 <img src="img/logo.png" alt="Logo" class="img-center"/>
+                <h3 class="text-danger text-center" id="message">
+                    ${sessionScope.message}
+                </h3>
                 <div class="col-md-10 col-md-offset-1">
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -27,19 +31,20 @@
                         </thead>
                         <tbody>
                             <c:forEach var="event" items="${sessionScope.events}" >
-                             <tr>
-                                <td>
-                                    <a href="GetUsersForEvent?eventId=${event.id}">${event.name}</a>
-                                </td>
-                                <td>${event.place}</td>
-                                <td>${event.date}</td>
-                                <td>${event.startTime}</td>
-                                <td>${event.endTime}</td>
-                                <td>${event.durationInHours}</td>
-                                <td><select class="add-user" data-event-id></select>
-                                    <button class="btn-get-available-users" data-eventid="${event.id}">Slobodni volonteri</button></td>
-                            </tr>
-                        </c:forEach>
+                                <tr>
+                                    <td>
+                                        <a href="GetUsersForEvent?eventId=${event.id}">${event.name}</a><br/>
+                                        <a href="DeleteEvent?eventId=${event.id}" class="delete-event-btn">Obrisi akciju</a>
+                                    </td>
+                                    <td>${event.place}</td>
+                                    <td>${event.date}</td>
+                                    <td>${event.startTime}</td>
+                                    <td>${event.endTime}</td>
+                                    <td>${event.durationInHours}</td>
+                                    <td><select class="add-user" data-event-id></select>
+                                        <button class="btn-get-available-users" data-eventid="${event.id}">Slobodni volonteri</button></td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

@@ -1,3 +1,4 @@
+let _users = [];
 $(document).ready(function () {
     $(".btn-get-available-users").click(getUsers);
 });
@@ -5,19 +6,16 @@ $(document).ready(function () {
 function getUsers() {
 
     let eventId = $(this).data('eventid');
-
-
-    console.log(eventId);
     $.ajax({
-        url: 'GetAvailableUsersForEvent',
-        data: JSON.stringify(eventId),
+        type: 'GET',
+        url: 'GetAvailableUsersForEvent?eventId='+eventId,
         contentType: 'application/json; charset=utf-8',
-        type: 'POST',
         success: function (response) {
-            console.log(response);
+            _users = JSON.parse(response);
+            
         },
         error: function (response) {
-            console.log(response);
+            alert(response);
         }
     });
 }

@@ -2,11 +2,10 @@ package services;
 
 import db.DB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,44 +13,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.ResourceHelper;
+import rowmappers.EventsRowMapper;
 import rowmappers.UsersRowMapper;
 
-public class GetUsers extends HttpServlet {
+public class GetAllUsers extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         HttpSession session = request.getSession();
+
+        String address = "all_users.jsp";
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
-        String address = "event_users.jsp";
-        
-        String query = "SELECT\n"
-                + "    u.id,\n"
-                + "    u.name,\n"
-                + "    u.last_name,\n"
-                + "    u.birthday,\n"
-                + "    u.total_hours,\n"
-                + "    u.start_year,\n"
-                + "    u.nickname\n"
-                + "FROM\n"
-                + "    USER AS u\n";
         try {
             con = DB.getConnection();
-            stmt = con.createStatement();
+            String query = ResourceHelper.getResourceText("/sql/getAllUsers.sql");
+            stmt = con.prepareStatement(query);
+            rs = stmt.executeQuery();
+            session.setAttribute("users", UsersRowMapper.mapData(rs));
 
-            rs = stmt.executeQuery(query);
-            
-            session.setAttribute("userList", UsersRowMapper.mapData(rs));
-            
-            response.sendRedirect(address);
-        } catch (SQLException ex) {
-            Logger.getLogger(GetUsers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException exc) {
+            session.setAttribute("message", "Nemoguce je priakzati sve korisnike");
+            address = "admin.jsp";
+            Logger.getLogger(AddEvent.class.getName()).log(Level.SEVERE, null, exc);
         }
-        
-        
-
+        response.sendRedirect(address);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

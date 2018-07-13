@@ -1,47 +1,63 @@
-package services;
 
+package rowmappers;
+
+import com.google.gson.Gson;
 import db.DB;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import rowmappers.EventsRowMapper;
+import models.ResourceHelper;
+import models.User;
 
-public class GetEvents extends HttpServlet {
+public class GetAvailableUsersForEvent extends HttpServlet {
 
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null; 
-       String address = "all_events.jsp";
+       
+        String id = request.getParameter("eventId");
+        int eventId = Integer.parseInt(request.getParameter("eventId"));
         
-        try {
-            conn = DB.getConnection();
-            stmt = conn.createStatement();
-
-            String query = "SELECT id, name, date, start_time, volonteur_number,"
-                    + " end_time, hours_duration, place"
-                    + " FROM event e"
-                    + " WHERE is_deleted = 0";
-
-            rs = stmt.executeQuery(query);
-            session.setAttribute("events", EventsRowMapper.mapData(rs));
-            response.sendRedirect(address);
-        } catch (SQLException exc) {
-            System.out.println(exc.getMessage());
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<User> availableUsers = new ArrayList<>();
+        
+        try{
+            con = DB.getConnection();
+            stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/getAvailableUsersForEvent.sql"));
+            stmt.setInt(1, eventId);
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                User user = new User();
+                
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setBirthday(rs.getDate("birthday"));
+                
+                availableUsers.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetAvailableUsersForEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(new Gson().toJson(availableUsers));   
+        String arrayTOJson = new Gson().toJson(availableUsers);
+        response.getWriter().write(arrayTOJson);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -80,4 +96,5 @@ public class GetEvents extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

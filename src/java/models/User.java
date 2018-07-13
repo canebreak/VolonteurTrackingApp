@@ -5,12 +5,12 @@ import java.util.Date;
 public class User {
 
     private int id;
-    private String name, lastName, nickName;
+    private String name, lastName, username;
     private Date birthday;
     private float totalHours;
     private int startYear;
     private String password;
-    private int isDeleted, isAdmin;
+    private int isAdmin;
 
     public User() {
     }
@@ -23,13 +23,15 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+ 
 
     public int getId() {
         return id;
@@ -87,17 +89,14 @@ public class User {
         this.password = password;
     }
 
-    public int getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(int isDeleted) {
-        this.isDeleted = isDeleted;
-    }
+ 
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + ", nickName=" + nickName + ", birthday=" + birthday + ", totalNumber=" + totalHours + ", startYear=" + startYear + ", password=" + password + ", isDeleted=" + isDeleted + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", lastName=" +
+                lastName + ", username=" + username + ", birthday=" + birthday 
+                + ", totalNumber=" + totalHours + ", startYear=" + startYear
+                + ", password=" + password + ",}";
     }
 
 }

@@ -5,44 +5,28 @@
         <servlet-class>services.Login</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>services.Logout</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>services.Register</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetEvents</servlet-name>
-        <servlet-class>services.GetEvents</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetUser</servlet-name>
-        <servlet-class>services.GetUser</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetEventsForUser</servlet-name>
-        <servlet-class>services.GetEventsForUser</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>services.DeleteUser</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddEvent</servlet-name>
-        <servlet-class>services.AddEvent</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddUserToEvent</servlet-name>
-        <servlet-class>services.AddUserToEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>services.ChangePassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetUsers</servlet-name>
-        <servlet-class>services.GetUsers</servlet-class>
+        <servlet-name>AddEvent</servlet-name>
+        <servlet-class>services.AddEvent</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Logout</servlet-name>
-        <servlet-class>services.Logout</servlet-class>
+        <servlet-name>GetAllEvents</servlet-name>
+        <servlet-class>services.GetAllEvents</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllUsers</servlet-name>
+        <servlet-class>services.GetAllUsers</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetUsersForEvent</servlet-name>
@@ -50,51 +34,35 @@
     </servlet>
     <servlet>
         <servlet-name>GetAvailableUsersForEvent</servlet-name>
-        <servlet-class>services.GetAvailableUsersForEvent</servlet-class>
+        <servlet-class>rowmappers.GetAvailableUsersForEvent</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetEvents</servlet-name>
-        <url-pattern>/GetEvents</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetUser</servlet-name>
-        <url-pattern>/GetUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetEventsForUser</servlet-name>
-        <url-pattern>/GetEventsForUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteUser</servlet-name>
-        <url-pattern>/DeleteUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddEvent</servlet-name>
-        <url-pattern>/AddEvent</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddUserToEvent</servlet-name>
-        <url-pattern>/AddUserToEvent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetUsers</servlet-name>
-        <url-pattern>/GetUsers</url-pattern>
+        <servlet-name>AddEvent</servlet-name>
+        <url-pattern>/AddEvent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
+        <servlet-name>GetAllEvents</servlet-name>
+        <url-pattern>/GetAllEvents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllUsers</servlet-name>
+        <url-pattern>/GetAllUsers</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetUsersForEvent</servlet-name>

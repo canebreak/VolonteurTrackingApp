@@ -12,22 +12,23 @@ public class UsersRowMapper {
 
     public static List<User> mapData(ResultSet rs) {
 
-        List<User> userList = new ArrayList<>();
-
+        List<User> users = new ArrayList<>();
+        User user = null;
         try {
             while (rs.next()) {
-                User user = new User();
+                user = new User();
+                user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setBirthday(rs.getDate("birthday"));
-                user.setTotalHours(rs.getFloat("total_hours"));
                 user.setStartYear(rs.getInt("start_year"));
-                user.setNickName(rs.getString("nickname"));
-                userList.add(user);
+                user.setUsername(rs.getString("username"));
+                user.setTotalHours(rs.getFloat("total_hours"));
+                users.add(user);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsersRowMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserRowMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return userList;
+        return users;
     }
 }

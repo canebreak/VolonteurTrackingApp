@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/GetAvailableUsersForEvent.java</file>
-            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/all_events.jsp</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/sql/addEvent.sql</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/services/Login.java</file>
             <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/js/get-all-users-ajax.js</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/web/all_events.jsp</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/sql/getAvailableUsersForEvent.sql</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/rowmappers/GetAvailableUsersForEvent.java</file>
+            <file>file:/C:/Users/Blagoje/Documents/GitHub/VolonteurTrackingApp/src/java/models/ResourceHelper.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,15 +3,17 @@ package services;
 import db.DB;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.UserEvents;
+import models.ResourceHelper;
+import models.User;
 
 public class ChangePassword extends HttpServlet {
 
@@ -19,42 +21,38 @@ public class ChangePassword extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String address = "login.jsp";
+
+        User user = (User) session.getAttribute("user");
+
+        String address = "Logout";
+
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String newPasswordConfirm = request.getParameter("newPasswordConfirm");
 
-        UserEvents userEvents = (UserEvents) session.getAttribute("userEvents");
         Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
+        PreparedStatement stmt = null;
 
         if (oldPassword.equals(newPassword)) {
-            session.setAttribute("message", "Stara i nova sifra ne mogu "
-                    + "biti iste");
-            response.sendRedirect(address);
-        }if (!newPassword.equals(newPasswordConfirm)) {
-            session.setAttribute("message", "Nova sifra i potvrda sifre"
-                    + " ne mogu biti iste");
-            response.sendRedirect(address);
-        }
-        if (!newPassword.equals(newPasswordConfirm)) {
-            session.setAttribute("message", "Nova sifra i potvrda sifre"
-                    + " ne mogu biti iste");
-            response.sendRedirect(address);
-        }
-        try {
-            con = DB.getConnection();
-            stmt = con.createStatement();
+            session.setAttribute("message", "Sifre su iste");
+        } else if (!newPassword.equals(newPasswordConfirm)) {
+            session.setAttribute("message", "Potvrdna sifra nije ista");
+        } else {
 
-            String query = "Update user set password = '" + newPassword + "'"
-                    + "where id=" + userEvents.getId();
-            if (stmt.execute(query)) {
-                session.setAttribute("message", "Sifra uspesno promenjena");
-                response.sendRedirect(address);
+            try {
+                con = DB.getConnection();
+                String query = ResourceHelper.getResourceText("/sql/changePassword.sql");
+                stmt = con.prepareStatement(query);
+                stmt.setString(1, newPassword);
+                stmt.setInt(2, user.getId());
+
+                stmt.execute();
+
+            } catch (SQLException ex) {
+                address = "change_password.jsp";
+                Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            response.sendRedirect(address);
         }
 
     }
