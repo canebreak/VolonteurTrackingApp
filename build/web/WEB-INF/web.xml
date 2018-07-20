@@ -40,6 +40,26 @@
         <servlet-name>AddUserToEvent</servlet-name>
         <servlet-class>services.AddUserToEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteEvent</servlet-name>
+        <servlet-class>services.DeleteEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReturnToAdmin</servlet-name>
+        <servlet-class>services.ReturnToAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetUserInfo</servlet-name>
+        <servlet-class>services.GetUserInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>services.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUserFromEvent</servlet-name>
+        <servlet-class>services.DeleteUserFromEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -79,6 +99,26 @@
     <servlet-mapping>
         <servlet-name>AddUserToEvent</servlet-name>
         <url-pattern>/AddUserToEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEvent</servlet-name>
+        <url-pattern>/DeleteEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReturnToAdmin</servlet-name>
+        <url-pattern>/ReturnToAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUserInfo</servlet-name>
+        <url-pattern>/GetUserInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserFromEvent</servlet-name>
+        <url-pattern>/DeleteUserFromEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

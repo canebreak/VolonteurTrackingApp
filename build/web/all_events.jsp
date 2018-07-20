@@ -14,6 +14,7 @@
         <div class="container">
             <div class="row">
                 <img src="img/logo.png" alt="Logo" class="img-center"/>
+                <button class="btn btn-default"><a href="ReturnToAdmin">Nazad</a></button>
                 <h3 class="text-danger text-center" id="message">
                     ${sessionScope.message}
                 </h3>

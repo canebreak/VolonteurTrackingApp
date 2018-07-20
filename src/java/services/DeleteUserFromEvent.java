@@ -1,11 +1,9 @@
-
 package services;
 
 import db.DB;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,39 +11,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.ResourceHelper;
-import rowmappers.UsersRowMapper;
 
+public class DeleteUserFromEvent extends HttpServlet {
 
-public class GetUsersForEvent extends HttpServlet {
-
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        int userId = Integer.parseInt(request.getParameter("userId"));
         int eventId = Integer.parseInt(request.getParameter("eventId"));
-        
-        String address = "event_users.jsp";
-        HttpSession session = request.getSession();
-        Connection conn = null;
+        Connection con = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;
         
-        
-        try{
-            conn = DB.getConnection();
-            String query = ResourceHelper.getResourceText("/sql/getUsersForEvent.sql");
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, eventId);
-            
-            session.setAttribute("users", UsersRowMapper.mapData(stmt.executeQuery()));
-            session.setAttribute("eventId", eventId);
+        try {
+            con = DB.getConnection();
+            String query = ResourceHelper.getResourceText("/sql/deleteUserFromEvent.sql");
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, eventId);
+            request.getSession().setAttribute("message", "Korisnik uspesno obrisan sa akcije");
         } catch (SQLException ex) {
-            Logger.getLogger(GetUsersForEvent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteUserFromEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       response.sendRedirect(address);
+        response.sendRedirect("ReturnToAdmin");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

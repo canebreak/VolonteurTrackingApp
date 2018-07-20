@@ -2,12 +2,16 @@ function showNotification(response)
 {
     let htmlTrue = "<div class='alert alert-success'><strong>Korisnik dodat!</strong></div>";
 
-    let htmlFalse = "  <div class='alert alert-danger'><strong>Korisnik nije dodat!</strong></div>";
+    let htmlFalse = "<div class='alert alert-danger'><strong>Korisnik nije dodat!</strong></div>";
 
     dispalyNotification();
-    if (response)
+    
+    if(typeof(response) === "string")
     {
-
+        $(".notification").html(response);
+    }
+   else if (response)
+    {
         $(".notification").html(htmlTrue);
     } else {
         $(".notification").html(htmlFalse);

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/user.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VTA | <c:out value="${sessionScope.user.name}" />
-</title>
+        </title>
     </head>
     <body>
         <div class="container">
@@ -24,16 +24,18 @@
                                     <p><strong>Ime: </strong> <c:out value="${sessionScope.user.name}" /></p>
                                     <p><strong>Prezime: </strong> <c:out value="${sessionScope.user.lastName}" /></p>
                                     <p><strong>Datum rodjenja: </strong><c:out value="${sessionScope.user.birthday}" /></p>
-                                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.userHours}" /></p>
+                                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.user.totalHours}" /></p>
                                     <p><strong>Godina pocetka: </strong> <c:out value="${sessionScope.user.startYear}" /></p>
                                     <p><strong>Korisnicko ime: </strong> <c:out value="${sessionScope.user.username}" /></p>
-                                    <a href="change_password.jsp" class="btn btn-primary">Promeni sifru</a>
-                                    <a href="Logout" class="btn btn-primary">Log out</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-default"><a href="ReturnToAdmin">Nazad</a></button>
+                        </div>
+                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -55,7 +57,7 @@
                                     <td>${event.endTime}</td>
                                     <td>${event.durationInHours}</td>
                                 </tr>
-                                </c:forEach>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

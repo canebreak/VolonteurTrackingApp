@@ -45,15 +45,31 @@ public class Login extends HttpServlet {
 
             if (user != null) {
                 if (user.getPassword().equals(password)) {
+                    //user.setUsername(username);
+                    stmt = con.prepareStatement("select sum(xref.hours) total_hours\n"
+                            + "from user_event_xref xref\n"
+                            + "left join event e ON\n"
+                            + "xref.event_id = e.id\n"
+                            + "where user_id = ?\n"
+                            + "AND e.is_deleted = 0 and xref.is_deleted=0");
+                    stmt.setInt(1, user.getId());
+                    rs = stmt.executeQuery();
+
+                    int res = 0;
+                    if (rs.next()) {
+                        res = rs.getInt("total_hours");
+                    }
+                    session.setAttribute("userHours", res);
                     session.setAttribute("user", user);
                     //get user events
-                    stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/getUserEvents.sql"));
+                    String query = ResourceHelper.getResourceText("/sql/getUserEvents.sql");
+                    stmt = con.prepareStatement(query);
                     stmt.setInt(1, user.getId());
                     rs = stmt.executeQuery();
 
                     List<Event> events = EventsRowMapper.mapData(rs);
-
-                    session.setAttribute("events", events);
+                    System.out.println(events);
+                    session.setAttribute("userEvents", events);
 
                     if (user.getIsAdmin() == 1) {
                         address = "admin.jsp";

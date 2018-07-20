@@ -17,4 +17,6 @@ WHERE
         u.id = xref.user_id
     WHERE
         xref.event_id = ?
+        and xref.is_deleted = 0
 )
+and u.is_deleted = 0

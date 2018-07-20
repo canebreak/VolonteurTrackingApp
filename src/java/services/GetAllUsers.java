@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.ResourceHelper;
-import rowmappers.EventsRowMapper;
 import rowmappers.UsersRowMapper;
 
 public class GetAllUsers extends HttpServlet {
@@ -29,6 +28,8 @@ public class GetAllUsers extends HttpServlet {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        session.setAttribute("message", "");
+        
         try {
             con = DB.getConnection();
             String query = ResourceHelper.getResourceText("/sql/getAllUsers.sql");

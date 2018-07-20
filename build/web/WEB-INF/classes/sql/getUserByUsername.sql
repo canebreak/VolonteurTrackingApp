@@ -6,15 +6,13 @@ SELECT
     u.start_year,
     u.password,
     u.is_admin,
-    SUM(xref.hours) total_hours,
     u.username
 FROM
     USER u
 LEFT JOIN user_event_xref xref ON
     u.id = xref.user_id
+    LEFT JOIN event e ON
+    xref.event_id = e.id
 WHERE
-    u.is_deleted = 0 AND u.username = ?
-GROUP BY
-    u.id
-ORDER BY
-    u.id
+    u.username = ? AND
+    u.is_deleted = 0

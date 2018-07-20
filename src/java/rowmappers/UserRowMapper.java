@@ -21,7 +21,7 @@ public class UserRowMapper {
                 user.setStartYear(rs.getInt("start_year"));
                 user.setPassword(rs.getString("password"));
                 user.setIsAdmin(rs.getInt("is_admin"));
-                user.setTotalHours(rs.getFloat("total_hours"));
+                //user.setTotalHours(rs.getFloat("total_hours"));
                 user.setUsername(rs.getString("username"));
             }
         } catch (SQLException ex) {

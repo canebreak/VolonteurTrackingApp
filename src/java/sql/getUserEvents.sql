@@ -11,4 +11,5 @@ FROM event AS
 LEFT JOIN user_event_xref xref ON
     e.id = xref.event_id
 WHERE
+    e.is_deleted = 0 and xref.is_deleted = 0 and
     xref.user_id = ?

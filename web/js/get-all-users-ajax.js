@@ -45,6 +45,7 @@ function addUserToEvent(){
         
         if(hours === "" || hours === undefined)
         {
+            showNotification("<div class='alert alert-danger'><strong>Dodajte sate!</strong></div>");
             return false;
         }
         $.ajax({

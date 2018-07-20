@@ -10,7 +10,12 @@
     <body>
         <div class="container">
             <div class="row">
-                <img src="img/logo.png" alt="Logo" class="img-center"/>
+                <img src="img/logo.png" alt="Logo" class="img-center" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-default"><a href="ReturnToAdmin">Nazad</a></button>
+                    </div>
+                </div>
                 <div class="col-md-10 col-md-offset-1">
                     <table class="table table-striped">
                         <thead>
@@ -24,9 +29,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="user" items="${sessionScope.user}">
+                            <c:forEach var="user" items="${sessionScope.users}">
                                 <tr>
-                                    <td>${user.name}</td>
+                                    <td>
+                                        <a href="GetUserInfo?userId=${user.id}">${user.name}</a><br/>
+                                        <a class="delete-event-btn" href="DeleteUserFromEvent?userId=${user.id}&eventId=${sessionScope.eventId}">Obrisi korisnika sa akcije</a>
+                                    </td>
                                     <td>${user.lastName}</td>
                                     <td>${user.birthday}</td>
                                     <td>${user.totalHours}</td>

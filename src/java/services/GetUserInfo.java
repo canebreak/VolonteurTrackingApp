@@ -1,4 +1,3 @@
-
 package services;
 
 import db.DB;
@@ -7,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,38 +14,55 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Event;
 import models.ResourceHelper;
-import rowmappers.UsersRowMapper;
+import models.User;
+import rowmappers.EventsRowMapper;
+import rowmappers.UserRowMapper;
 
+public class GetUserInfo extends HttpServlet {
 
-public class GetUsersForEvent extends HttpServlet {
-
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int eventId = Integer.parseInt(request.getParameter("eventId"));
-        
-        String address = "event_users.jsp";
+
         HttpSession session = request.getSession();
-        Connection conn = null;
+        Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
-        
-        try{
-            conn = DB.getConnection();
-            String query = ResourceHelper.getResourceText("/sql/getUsersForEvent.sql");
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, eventId);
+        String addresss = "user_info.jsp";
+        User user = new User();
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        try {
+            con = DB.getConnection();
+            stmt = con.prepareStatement(ResourceHelper.getResourceText("/sql/getUserById.sql"));
             
-            session.setAttribute("users", UsersRowMapper.mapData(stmt.executeQuery()));
-            session.setAttribute("eventId", eventId);
+            stmt.setInt(1, userId);
+            
+            rs = stmt.executeQuery();
+            
+            user = UserRowMapper.mapData(rs);
+            
+            session.setAttribute("user", user);
+
+            System.out.println(user.toString());
+            
+            //get user events
+            String query = ResourceHelper.getResourceText("/sql/getUserEvents.sql");
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, userId);
+            
+            rs = stmt.executeQuery();
+            
+            List<Event> events = EventsRowMapper.mapData(rs);
+            session.setAttribute("userEvents", events);
+
         } catch (SQLException ex) {
-            Logger.getLogger(GetUsersForEvent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetUserInfo.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
         
-       response.sendRedirect(address);
+        response.sendRedirect(addresss);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

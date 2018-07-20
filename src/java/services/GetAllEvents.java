@@ -27,6 +27,8 @@ public class GetAllEvents extends HttpServlet {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        session.setAttribute("message", "");
+
         try {
             con = DB.getConnection();
             String query = ResourceHelper.getResourceText("/sql/getAllEvents.sql");

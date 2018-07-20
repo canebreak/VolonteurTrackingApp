@@ -14,9 +14,9 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <img src="img/logo.png" alt="Logo" class="img-center"/>
-                    <h3 class="text-danger text-center" id="message">
+                    <h4 class="text-danger text-center" id="message">
                         ${sessionScope.message}
-                    </h3>
+                    </h4>
                     <a href="new_event.jsp" class="btn btn-success">Dodaj akciju</a>
                     <a href="GetAllEvents" class="btn btn-info">Vidi sve akcije</a>
                     <a href="GetAllUsers" class="btn btn-info">Vidi sve volontere</a>
@@ -28,7 +28,7 @@
                     <p><strong>Ime:</strong> <c:out value="${sessionScope.user.name}" /></p>
                     <p><strong>Prezime:</strong> <c:out value="${sessionScope.user.lastName}" /></p>
                     <p><strong>Datum rodjenja:</strong><c:out value="${sessionScope.user.birthday}" /></p>
-                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.user.totalHours}" /></p>
+                    <p><strong>Broj sati: </strong><c:out value="${sessionScope.userHours}" /></p>
                     <p><strong>Godina pocetka:</strong> <c:out value="${sessionScope.user.startYear}" /></p>
                     <p><strong>Korisnicko ime:</strong> <c:out value="${sessionScope.user.username}" /></p>
                 </div>
@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${sessionScope.events}" var="event" >
+                        <c:forEach items="${sessionScope.userEvents}" var="event" >
                             <tr>
                                 <td>${event.name}</td>
                                 <td>${event.place}</td>
